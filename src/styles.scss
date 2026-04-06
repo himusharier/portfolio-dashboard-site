@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
+
+:root {
+	--font-body: 'Manrope', 'Segoe UI', sans-serif;
+	--font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+
+	--color-bg: #f7f1eb;
+	--color-surface: #fffaf6;
+	--color-surface-hover: #fff0e5;
+	--color-text: #2f2925;
+	--color-muted: #6f6258;
+	--color-border: #e7dacf;
+	--color-accent: #167491;
+
+	--shadow-soft: 0 12px 28px -18px rgb(16 24 40 / 38%);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	font-family: var(--font-body);
+	color: var(--color-text);
+	background: var(--color-bg);
+}

@@ -1,0 +1,70 @@
+<div class="dashboard-shell" [class.sidebar-open]="sidebarOpen">
+  <header class="topbar">
+    <div class="brand-section">
+      <button
+        type="button"
+        class="menu-button"
+        aria-label="Toggle sidebar"
+        (click)="toggleSidebar()"
+      >
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <div class="brand-text">
+        <p class="eyebrow">portfolio</p>
+        <h1>Sharier Himu</h1>
+      </div>
+    </div>
+
+    <div class="topbar-actions">
+      <a class="action-link" href="https://github.com/himusharier" target="_blank" rel="noreferrer">GitHub Profile</a>
+      <a class="action-link alt" href="/resume.txt" download>Download CV</a>
+    </div>
+  </header>
+
+  <aside class="sidebar" aria-label="Primary navigation">
+    <div class="sidebar-brand">
+      <span class="logo-mark" aria-hidden="true">R</span>
+      <div>
+        <p class="eyebrow">software engineer</p>
+        <h2>Himu</h2>
+      </div>
+    </div>
+
+    <p class="sidebar-copy">
+      Java and Spring Boot engineer with hands-on microservices and full-stack Angular delivery.
+    </p>
+
+    <nav>
+      @for (item of navItems; track item.label) {
+        <a
+          [routerLink]="item.route"
+          routerLinkActive="active"
+          class="nav-item"
+          (click)="closeSidebarOnMobile()"
+        >
+          <span class="material-symbols-outlined">{{ item.icon }}</span>
+          <span>{{ item.label }}</span>
+        </a>
+      }
+    </nav>
+
+    <div class="social-links" aria-label="Social links">
+      <a href="https://github.com/himusharier" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://himusharier.site" target="_blank" rel="noreferrer">Website</a>
+      <a href="https://quizfusion.himusharier.me/" target="_blank" rel="noreferrer">QuizFusion</a>
+    </div>
+  </aside>
+
+  <button
+    type="button"
+    class="overlay"
+    aria-label="Close sidebar"
+    (click)="toggleSidebar()"
+  ></button>
+
+  <main class="content-area">
+    <section class="content-card">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+</div>
