@@ -4,182 +4,171 @@ import { Component } from '@angular/core';
   selector: 'app-settings-page',
   standalone: true,
   template: `
-    <p class="kicker">Start a project</p>
-    <h2>Contact</h2>
-    <p class="copy">Tell me what you are building and I will reply as soon as possible.</p>
+    <section class="contact-page">
+      <div class="content-grid">
+        <article class="left-panel">
+          <h2>Start a Project</h2>
+          <p class="lead">Tell me what you are building and I will reply as soon as possible.</p>
 
-    <section class="contact-grid">
-      <article class="card">
-        <h3>Preferred channels</h3>
-        <ul>
-          <li><strong>GitHub:</strong> github.com/himusharier</li>
-          <li><strong>Website:</strong> himusharier.site</li>
-          <li><strong>Location:</strong> Dhaka, Bangladesh</li>
-        </ul>
-        <div class="actions">
-          <a href="https://github.com/himusharier" target="_blank" rel="noreferrer">Open GitHub</a>
-          <a href="https://himusharier.site" target="_blank" rel="noreferrer">Visit website</a>
-        </div>
-      </article>
-
-      <article class="card form-card">
-        <h3>Quick inquiry</h3>
-        <form (submit)="submitContact($event, name.value, email.value, details.value)">
-          <label>
-            Name
-            <input #name type="text" placeholder="Your full name" required />
-          </label>
-          <label>
-            Email
-            <input #email type="email" placeholder="you@company.com" required />
-          </label>
-          <label>
-            Project details
-            <textarea
-              #details
-              rows="4"
-              placeholder="Budget, timeline, and goals"
-              required
-            ></textarea>
-          </label>
-          <button type="submit">Send inquiry</button>
-        </form>
-
-        @if (feedbackMessage) {
-          <p class="feedback" [class.error]="feedbackIsError">{{ feedbackMessage }}</p>
-        }
-      </article>
+          <div class="channels-block">
+            <h4>Preferred Channels</h4>
+            <ul>
+              <li>
+                <span class="material-symbols-outlined" aria-hidden="true">code</span>
+                <div>
+                  <p>GitHub</p>
+                  <a href="https://github.com/himusharier" target="_blank" rel="noreferrer">
+                    github.com/himusharier
+                  </a>
+                </div>
+              </li>
+              <!-- <li>
+                <span class="material-symbols-outlined" aria-hidden="true">language</span>
+                <div>
+                  <p>Website</p>
+                  <a href="https://himusharier.site" target="_blank" rel="noreferrer">himusharier.site</a>
+                </div>
+              </li> -->
+              <li>
+                <span class="material-symbols-outlined" aria-hidden="true">phone</span>
+                <div>
+                  <p>WhatsApp</p>
+                  <a href="https://wa.me/+8801867849219" target="_blank" rel="noreferrer">
+                    +880 1867 849219
+                  </a>
+                </div>
+              </li>
+              <li>
+                <span class="material-symbols-outlined" aria-hidden="true">share</span>
+                <div>
+                  <p>Facebook</p>
+                  <a href="https://fb.com/sharier.himu" target="_blank" rel="noreferrer">
+                    facebook.com/sharier.himu
+                  </a>
+                </div>
+              </li>
+              <li>
+                <span class="material-symbols-outlined" aria-hidden="true">work</span>
+                <div>
+                  <p>LinkedIn</p>
+                  <a href="https://www.linkedin.com/in/sharier-himu" target="_blank" rel="noreferrer">
+                    linkedin.com/in/sharier-himu
+                  </a>
+                </div>
+              </li>
+              <li>
+                <span class="material-symbols-outlined" aria-hidden="true">location_on</span>
+                <div>
+                  <p>Location</p>
+                  <span>Dhaka, Bangladesh</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
     </section>
   `,
   styles: `
-    .kicker {
-      margin: 0;
-      color: var(--color-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.7rem;
+    .contact-page {
+      min-height: 100%;
+      padding: 0.45rem;
     }
 
-    h2 {
-      margin: 0.2rem 0;
-      font: 700 1.35rem/1.2 var(--font-display);
+    .content-grid {
+      max-width: 1080px;
+      margin: 0;
+      display: block;
+      align-items: start;
+    }
+
+    .left-panel {
+      padding: clamp(0.25rem, 1vw, 0.7rem);
+    }
+
+    .left-panel h2 {
+      margin: 0;
+      font: 700 clamp(2rem, 6vw, 3.25rem) / 0.98 var(--font-display);
+      letter-spacing: -0.045em;
       color: var(--color-text);
     }
 
-    .copy {
+    .lead {
+      margin: 1rem 0 0;
+      max-width: 46ch;
       color: var(--color-muted);
-      margin: 0 0 0.8rem;
+      font-size: clamp(1rem, 2vw, 1.08rem);
+      line-height: 1.58;
     }
 
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 0.8rem;
+    .channels-block {
+      margin-top: 2.25rem;
     }
 
-    .card {
-      border: 1px solid var(--color-border);
-      border-radius: 14px;
-      background: #fff;
-      padding: 0.9rem;
+    .channels-block h4 {
+      margin: 0 0 1rem;
+      color: var(--color-text);
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
     }
 
-    h3 {
+    .channels-block ul {
+      list-style: none;
       margin: 0;
-      font: 700 1rem/1.2 var(--font-display);
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      // max-width: 40ch;
     }
 
-    ul {
-      margin: 0.75rem 0;
-      padding-left: 1rem;
-      color: var(--color-muted);
+    .channels-block li {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.9rem;
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgb(255 255 255 / 92%), rgb(255 248 242 / 96%));
+      border: 1px solid var(--color-border);
+    }
+
+    .channels-block .material-symbols-outlined {
+      width: 2.3rem;
+      height: 2.3rem;
+      border-radius: 0.95rem;
       display: grid;
-      gap: 0.45rem;
+      place-items: center;
+      color: var(--color-accent);
+      background: linear-gradient(140deg, rgb(22 116 145 / 14%), rgb(255 127 80 / 20%));
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .channels-block p {
+      margin: 0;
+      color: var(--color-text);
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+
+    .channels-block a,
+    .channels-block span {
+      color: var(--color-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
       line-height: 1.45;
     }
 
-    .actions {
-      display: flex;
-      gap: 0.6rem;
+    .channels-block a:hover {
+      color: var(--color-accent);
     }
 
-    .actions a,
-    button {
-      text-decoration: none;
-      border: 1px solid var(--color-border);
-      border-radius: 10px;
-      background: #fff;
-      color: var(--color-text);
-      font: inherit;
-      font-size: 0.82rem;
-      font-weight: 700;
-      padding: 0.45rem 0.7rem;
-      cursor: pointer;
-    }
-
-    .actions a:first-child,
-    button {
-      background: var(--color-accent);
-      border-color: transparent;
-      color: #fff;
-    }
-
-    form {
-      margin-top: 0.75rem;
-      display: grid;
-      gap: 0.55rem;
-    }
-
-    label {
-      display: grid;
-      gap: 0.35rem;
-      font-size: 0.82rem;
-      color: var(--color-muted);
-      font-weight: 600;
-    }
-
-    input,
-    textarea {
-      border: 1px solid var(--color-border);
-      border-radius: 10px;
-      padding: 0.55rem 0.65rem;
-      font: inherit;
-      color: var(--color-text);
-      resize: vertical;
-      background: #fffdfa;
-    }
-
-    .feedback {
-      margin: 0.7rem 0 0;
-      color: #1d6e55;
-      font-size: 0.82rem;
-      font-weight: 600;
-    }
-
-    .feedback.error {
-      color: #ab3d2d;
+    @media (max-width: 920px) {
+      .channels-block {
+        margin-top: 1.6rem;
+      }
     }
   `
 })
-export class SettingsPageComponent {
-  feedbackMessage = '';
-  feedbackIsError = false;
-
-  submitContact(event: Event, name: string, email: string, details: string): void {
-    event.preventDefault();
-
-    const cleanName = name.trim();
-    const cleanEmail = email.trim();
-    const cleanDetails = details.trim();
-
-    if (!cleanName || !cleanEmail || !cleanDetails) {
-      this.feedbackIsError = true;
-      this.feedbackMessage = 'Please complete all fields before sending.';
-      return;
-    }
-
-    this.feedbackIsError = false;
-    this.feedbackMessage =
-      'Inquiry captured. Please continue on GitHub or website links while direct email is being configured.';
-  }
-}
+export class SettingsPageComponent {}

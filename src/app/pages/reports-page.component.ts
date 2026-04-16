@@ -4,79 +4,165 @@ import { Component } from '@angular/core';
   selector: 'app-reports-page',
   standalone: true,
   template: `
-    <p class="kicker">About me</p>
-    <h2>Java and microservices engineer with full-stack execution</h2>
-    <p class="copy">
-      Software Engineer experienced in Spring Boot web applications, RESTful APIs, and Angular frontends.
-      I focus on maintainable architecture and practical delivery.
-    </p>
+    <div class="container">
+      <h2 class="main-heading">Java and microservices engineer with full-stack execution</h2>
+      <p class="description">
+        I build scalable, maintainable systems using Spring Boot and Angular with a strong focus on clean architecture and practical delivery.
+      </p>
 
-    <section class="grid">
-      <article class="card">
-        <h3>My journey</h3>
-        <ul>
-          <li><strong>2026:</strong> 25 public repositories with active work across Java and Angular.</li>
-          <li><strong>2025:</strong> Delivered end-to-end systems using Spring Boot, Angular, PostgreSQL, and Docker.</li>
-          <li><strong>2021:</strong> Started GitHub journey and continuously built production-style projects.</li>
-        </ul>
-      </article>
+      <div class="content-grid">
+        <!-- My Journey Section -->
+        <div class="section">
+          <h3 class="section-title">My Journey</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="year">2026</div>
+              <p>25 public repositories with active contributions in Java and Angular</p>
+            </div>
+            <div class="timeline-item">
+              <div class="year">2025</div>
+              <p>Delivered end-to-end systems using Spring Boot, Angular, PostgreSQL & Docker</p>
+            </div>
+            <div class="timeline-item">
+              <div class="year">2021</div>
+              <p>Began GitHub journey building production-style projects</p>
+            </div>
+          </div>
+        </div>
 
-      <article class="card">
-        <h3>What clients value</h3>
-        <ul>
-          <li>Domain-driven, decoupled service design for scalable backends</li>
-          <li>Secure API implementation with authentication best practices</li>
-          <li>Clear handoff and documentation for team collaboration</li>
-          <li>Balanced backend robustness with user-friendly frontend interfaces</li>
-        </ul>
-      </article>
-    </section>
+        <!-- What Clients Value Section -->
+        <div class="section">
+          <h3 class="section-title">What Clients Value</h3>
+          <ul class="values-list">
+            <li>
+              <span class="checkmark">✓</span>
+              <span>Domain-driven microservices architecture for scalable backends</span>
+            </li>
+            <li>
+              <span class="checkmark">✓</span>
+              <span>Secure REST APIs with JWT authentication best practices</span>
+            </li>
+            <li>
+              <span class="checkmark">✓</span>
+              <span>Clean, well-documented code and smooth team handover</span>
+            </li>
+            <li>
+              <span class="checkmark">✓</span>
+              <span>Balanced focus on robust backend and intuitive frontend UX</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   `,
   styles: `
-    .kicker {
+    .container {
+      max-width: 1080px;
       margin: 0;
-      color: var(--color-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.7rem;
+      padding: 0 1rem;
     }
 
-    h2 {
-      margin: 0.2rem 0;
-      font: 700 1.35rem/1.2 var(--font-display);
+    .main-heading {
+      margin: 0 0 1.5rem;
+      font: 700 clamp(2.5rem, 5vw, 3.5rem) / 1.2 var(--font-display);
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      max-width: 55ch;
+    }
+
+    .description {
+      font-size: clamp(1rem, 2vw, 1.125rem);
+      color: var(--color-muted);
+      line-height: 1.6;
+      margin: 0 0 3rem;
+      max-width: 70ch;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+    }
+
+    .section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section-title {
+      margin: 0 0 1.75rem;
+      font: 700 1.5rem / 1.3 var(--font-display);
       color: var(--color-text);
     }
 
-    .copy {
-      color: var(--color-muted);
-      margin: 0 0 0.85rem;
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 0.8rem;
+    .timeline-item {
+      display: flex;
+      gap: 1.5rem;
     }
 
-    .card {
-      border: 1px solid var(--color-border);
-      background: #fff;
-      border-radius: 14px;
-      padding: 0.9rem;
+    .year {
+      font-weight: 700;
+      font-size: 1.125rem;
+      color: var(--color-accent);
+      min-width: 3.5rem;
+      flex-shrink: 0;
+      font-family: 'Courier New', monospace;
     }
 
-    h3 {
+    .timeline-item p {
       margin: 0;
-      font: 700 1rem/1.2 var(--font-display);
+      color: var(--color-text);
+      line-height: 1.5;
+      font-weight: 500;
     }
 
-    ul {
-      margin: 0.7rem 0 0;
-      padding-left: 1rem;
-      color: var(--color-muted);
-      display: grid;
-      gap: 0.5rem;
-      line-height: 1.45;
+    .values-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .values-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.95rem;
+    }
+
+    .checkmark {
+      color: var(--color-accent);
+      font-weight: 700;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .values-list li span:last-child {
+      color: var(--color-text);
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .content-grid {
+        gap: 2.5rem;
+      }
+
+      .main-heading {
+        margin-bottom: 1rem;
+      }
+
+      .description {
+        margin-bottom: 2rem;
+      }
     }
   `
 })
