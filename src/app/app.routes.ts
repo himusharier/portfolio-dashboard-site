@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { DashboardShellComponent } from './layout/dashboard-shell.component';
 import { DashboardPageComponent } from './pages/dashboard-page.component';
-import { ReportsPageComponent } from './pages/reports-page.component';
+import { AboutPageComponent } from './pages/about-page.component';
 
 export const routes: Routes = [
 	{
@@ -12,12 +12,12 @@ export const routes: Routes = [
 			{ path: 'home', component: DashboardPageComponent },
 			{
 				path: 'projects',
-				loadComponent: () => import('./pages/users-page.component').then((m) => m.UsersPageComponent)
+				loadComponent: () => import('./pages/projects-page.component').then((m) => m.ProjectsPageComponent)
 			},
-			{ path: 'about', component: ReportsPageComponent },
+			{ path: 'about', component: AboutPageComponent },
 			{
 				path: 'contact',
-				loadComponent: () => import('./pages/settings-page.component').then((m) => m.SettingsPageComponent)
+				loadComponent: () => import('./pages/contact-page.component').then((m) => m.ContactPageComponent)
 			}
 		]
 	},

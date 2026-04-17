@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-settings-page',
+  selector: 'app-contact-page',
   standalone: true,
   template: `
     <section class="contact-page">
@@ -184,4 +184,4 @@ import { Component } from '@angular/core';
     }
   `
 })
-export class SettingsPageComponent {}
+export class ContactPageComponent {}

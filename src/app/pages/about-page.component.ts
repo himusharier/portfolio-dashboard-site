@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-reports-page',
+  selector: 'app-about-page',
   standalone: true,
   template: `
     <div class="container">
@@ -176,4 +176,4 @@ import { Component } from '@angular/core';
     }
   `
 })
-export class ReportsPageComponent {}
+export class AboutPageComponent {}

@@ -21,7 +21,7 @@ interface RepoProject {
 }
 
 @Component({
-  selector: 'app-users-page',
+  selector: 'app-projects-page',
   standalone: true,
   template: `
     <section class="head">
@@ -199,7 +199,7 @@ interface RepoProject {
     }
   `
 })
-export class UsersPageComponent implements OnInit {
+export class ProjectsPageComponent implements OnInit {
   private readonly http = inject(HttpClient);
   private readonly githubUsername = 'himusharier';
 
