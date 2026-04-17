@@ -1,30 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
-import { catchError, map, of } from 'rxjs';
-
-type ProjectCategory = 'All' | 'Web apps' | 'Landing pages';
-
-interface Project {
-  category: Exclude<ProjectCategory, 'All'>;
-  type: string;
-  title: string;
-  summary: string;
-  stack: string;
-  liveUrl: string;
-  sourceUrl: string;
-}
 
 interface GithubRepo {
   name: string;
+  visibility: 'public' | 'private';
   description: string | null;
   language: string | null;
-  html_url: string;
-  homepage: string | null;
   topics?: string[];
-  stargazers_count: number;
-  fork: boolean;
-  archived: boolean;
-  pushed_at: string;
+  updated_at: string;
+}
+
+interface RepoProject {
+  name: string;
+  visibility: 'Public' | 'Private';
+  summary: string;
+  tags: string[];
+  updated: string;
+  repoUrl: string;
+  repoPath: string;
 }
 
 @Component({
@@ -33,46 +26,37 @@ interface GithubRepo {
   template: `
     <section class="head">
       <div>
-        <p class="kicker">Selected work</p>
-        <h2>Projects</h2>
-      </div>
-      <div class="filters">
-        @for (category of categories; track category) {
-          <button
-            type="button"
-            [class.active]="selectedCategory === category"
-            (click)="selectCategory(category)"
-          >
-            {{ category }}
-          </button>
-        }
+        <p class="kicker">Repository-driven portfolio</p>
+        <h2>Projects and Repositories</h2>
+        <p class="intro">
+          Curated from your listed repositories with direct focus on real work, training modules, and client systems.
+        </p>
       </div>
     </section>
 
-    @if (isLoading) {
-      <p class="state-copy">Loading your latest GitHub projects...</p>
-    }
-
-    @if (errorMessage) {
-      <p class="state-copy error">{{ errorMessage }}</p>
-    }
-
-    @if (!isLoading && !errorMessage) {
+    <section class="section-block">
+      <h3>Featured Public Repositories</h3>
       <section class="project-grid">
-        @for (project of filteredProjects; track project.sourceUrl) {
+        @for (project of publicProjects; track project.name) {
           <article class="project-card">
-            <p class="tag">{{ project.type }}</p>
-            <h3>{{ project.title }}</h3>
-            <p>{{ project.summary }}</p>
-            <div class="meta">{{ project.stack }}</div>
-            <div class="links">
-              <a [href]="project.liveUrl" target="_blank" rel="noreferrer">Live demo</a>
-              <a [href]="project.sourceUrl" target="_blank" rel="noreferrer">Source</a>
+            <div class="card-main">
+              <p class="tag">{{ project.visibility }}</p>
+              <h4>{{ project.name }}</h4>
+              <p>{{ project.summary }}</p>
+              <div class="tags">
+                @for (tag of project.tags; track tag) {
+                  <span>{{ tag }}</span>
+                }
+              </div>
+              <a class="repo-link" [href]="project.repoUrl" target="_blank" rel="noreferrer">{{ project.repoPath }}</a>
+            </div>
+            <div class="card-side">
+              <small>Updated: {{ project.updated }}</small>
             </div>
           </article>
         }
       </section>
-    }
+    </section>
   `,
   styles: `
     .head {
@@ -98,43 +82,28 @@ interface GithubRepo {
       color: var(--color-text);
     }
 
-    .filters {
-      display: flex;
-      gap: 0.45rem;
-      flex-wrap: wrap;
-    }
-
-    .filters button {
-      border: 1px solid var(--color-border);
-      border-radius: 999px;
-      padding: 0.38rem 0.68rem;
-      background: #fff;
+    .intro {
+      margin: 0.35rem 0 0;
       color: var(--color-muted);
-      font: inherit;
-      font-size: 0.82rem;
-      cursor: pointer;
+      line-height: 1.5;
+      max-width: 70ch;
     }
 
-    .filters button.active {
+    .section-block {
+      margin-top: 1rem;
+    }
+
+    .section-block h3 {
+      margin: 0 0 0.8rem;
       color: var(--color-text);
-      background: #ffecdf;
-      border-color: #ffc8a5;
+      font-size: 1.04rem;
+      font-family: var(--font-display);
     }
 
     .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      display: flex;
+      flex-direction: column;
       gap: 0.8rem;
-    }
-
-    .state-copy {
-      margin: 0.2rem 0 0.9rem;
-      color: var(--color-muted);
-      font-weight: 600;
-    }
-
-    .state-copy.error {
-      color: #ab3d2d;
     }
 
     .project-card {
@@ -143,7 +112,23 @@ interface GithubRepo {
       background: #fff;
       padding: 0.9rem;
       display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .card-main {
+      display: grid;
       gap: 0.55rem;
+      min-width: 0;
+    }
+
+    .card-side {
+      display: grid;
+      gap: 0.35rem;
+      align-content: start;
+      justify-items: end;
+      text-align: right;
     }
 
     .tag {
@@ -155,9 +140,11 @@ interface GithubRepo {
       letter-spacing: 0.1em;
     }
 
-    h3 {
+    h4 {
       margin: 0;
       font-size: 1.08rem;
+      color: var(--color-text);
+      line-height: 1.35;
     }
 
     .project-card p {
@@ -166,123 +153,127 @@ interface GithubRepo {
       line-height: 1.45;
     }
 
-    .meta {
-      font-size: 0.82rem;
-      color: var(--color-text);
-      font-weight: 600;
-    }
-
-    .links {
-      display: flex;
-      gap: 0.65rem;
-    }
-
-    .links a {
+    .repo-link {
       color: var(--color-accent);
       text-decoration: none;
+      font-size: 0.86rem;
       font-weight: 700;
-      font-size: 0.82rem;
+      overflow-wrap: anywhere;
+    }
+
+    .repo-link:hover {
+      text-decoration: underline;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tags span {
+      border: 1px solid var(--color-border);
+      background: #fef2e9;
+      color: var(--color-text);
+      border-radius: 999px;
+      padding: 0.22rem 0.55rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .project-card small {
+      color: var(--color-muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    @media (max-width: 760px) {
+      .project-card {
+        grid-template-columns: 1fr;
+      }
+
+      .card-side {
+        justify-items: start;
+        text-align: left;
+      }
     }
   `
 })
 export class UsersPageComponent implements OnInit {
   private readonly http = inject(HttpClient);
-  private readonly username = 'himusharier';
+  private readonly githubUsername = 'himusharier';
 
-  readonly categories: ProjectCategory[] = ['All', 'Web apps', 'Landing pages'];
-  selectedCategory: ProjectCategory = 'All';
-  isLoading = true;
-  errorMessage = '';
-
-  projects: Project[] = [];
+  publicProjects: RepoProject[] = [];
 
   ngOnInit(): void {
-    this.loadProjectsFromGithub();
+    this.loadPublicProjects();
   }
 
-  get filteredProjects(): Project[] {
-    if (this.selectedCategory === 'All') {
-      return this.projects;
-    }
+  private loadPublicProjects(): void {
+    const url = `https://api.github.com/users/${this.githubUsername}/repos?sort=updated&per_page=100`;
 
-    return this.projects.filter((project) => project.category === this.selectedCategory);
+    this.http.get<GithubRepo[]>(url).subscribe({
+      next: (repos) => {
+        this.publicProjects = repos
+          .filter((repo) => repo.visibility === 'public')
+          .map((repo) => this.toRepoProject(repo));
+      },
+      error: () => {
+        this.publicProjects = [];
+      }
+    });
   }
 
-  selectCategory(category: ProjectCategory): void {
-    this.selectedCategory = category;
-  }
-
-  private loadProjectsFromGithub(): void {
-    const endpoint = `https://api.github.com/users/${this.username}/repos?sort=updated&per_page=100`;
-
-    this.http
-      .get<GithubRepo[]>(endpoint)
-      .pipe(
-        map((repos) =>
-          repos
-            .filter((repo) => !repo.fork && !repo.archived)
-            .sort((a, b) => +new Date(b.pushed_at) - +new Date(a.pushed_at))
-            .slice(0, 12)
-            .map((repo) => this.mapRepoToProject(repo))
-        ),
-        catchError(() => {
-          this.errorMessage = 'Could not load GitHub projects right now. Please try again shortly.';
-          return of([]);
-        })
-      )
-      .subscribe((projects) => {
-        this.projects = projects;
-        this.isLoading = false;
-      });
-  }
-
-  private mapRepoToProject(repo: GithubRepo): Project {
-    const topics = repo.topics ?? [];
-    const category: Exclude<ProjectCategory, 'All'> = this.toCategory(topics);
+  private toRepoProject(repo: GithubRepo): RepoProject {
+    const repoPath = `github.com/${this.githubUsername}/${repo.name}`;
 
     return {
-      category,
-      type: this.toProjectType(repo),
-      title: repo.name,
-      summary: repo.description ?? 'Repository with implementation details, source code, and project documentation.',
-      stack: this.toStackLabel(repo),
-      liveUrl: repo.homepage && repo.homepage.trim().length > 0 ? repo.homepage : repo.html_url,
-      sourceUrl: repo.html_url
+      name: repo.name,
+      visibility: 'Public',
+      summary: repo.description ?? 'Public GitHub repository with implementation details and source code.',
+      tags: this.toTags(repo),
+      updated: this.toDisplayDate(repo.updated_at),
+      repoUrl: `https://${repoPath}`,
+      repoPath
     };
   }
 
-  private toCategory(topics: string[]): Exclude<ProjectCategory, 'All'> {
-    const lowerTopics = topics.map((topic) => topic.toLowerCase());
-    const isLanding = lowerTopics.some(
-      (topic) => topic.includes('landing') || topic.includes('portfolio') || topic.includes('website')
-    );
+  private toTags(repo: GithubRepo): string[] {
+    const tags: string[] = [];
 
-    return isLanding ? 'Landing pages' : 'Web apps';
+    if (repo.language) {
+      tags.push(repo.language);
+    }
+
+    for (const topic of repo.topics ?? []) {
+      const formatted = topic
+        .split('-')
+        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+        .join(' ');
+
+      if (formatted && !tags.includes(formatted)) {
+        tags.push(formatted);
+      }
+
+      if (tags.length >= 5) {
+        break;
+      }
+    }
+
+    return tags.length > 0 ? tags : ['Repository'];
   }
 
-  private toProjectType(repo: GithubRepo): string {
-    const topics = (repo.topics ?? []).map((topic) => topic.toLowerCase());
+  private toDisplayDate(value: string): string {
+    const date = new Date(value);
 
-    if (topics.some((topic) => topic.includes('microservice'))) {
-      return 'Microservices';
+    if (Number.isNaN(date.getTime())) {
+      return value;
     }
 
-    if (topics.includes('angular') || topics.includes('angular19')) {
-      return 'Angular Web App';
-    }
-
-    if ((repo.language ?? '').toLowerCase() === 'java') {
-      return 'Backend Service';
-    }
-
-    return 'Web Project';
-  }
-
-  private toStackLabel(repo: GithubRepo): string {
-    const language = repo.language ?? 'Multi-language';
-    const topicPreview = (repo.topics ?? []).slice(0, 2).join(', ');
-    const stars = repo.stargazers_count > 0 ? `, ${repo.stargazers_count} star${repo.stargazers_count > 1 ? 's' : ''}` : '';
-
-    return topicPreview ? `${language}, ${topicPreview}${stars}` : `${language}${stars}`;
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
   }
 }

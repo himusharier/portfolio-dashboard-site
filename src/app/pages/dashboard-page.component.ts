@@ -6,15 +6,17 @@ import { Component } from '@angular/core';
   template: `
     <section class="hero">
       <div>
-        <p class="kicker">Software Engineer at Nirupon Limited</p>
-        <h2>Hi, I am Sharier Himu. I build scalable APIs and modern web platforms.</h2>
+        <p class="kicker">Software Engineer</p>
+        <h2>Building production-focused systems across Java, Angular, PHP, and Flutter.</h2>
         <p class="copy">
-          I specialize in Java, Spring Boot microservices, and Angular frontends with practical focus on clean
-          architecture, secure REST APIs, and production-ready UX.
+          I work across backend APIs, full-stack web apps, database systems, and mobile clients.
+          My portfolio spans Spring Boot microservices, Angular dashboards, Oracle/PostgreSQL SQL projects,
+          PHP platforms, and Flutter user clients.
         </p>
         <div class="cta-row">
-          <a href="https://github.com/himusharier" target="_blank" rel="noreferrer">View GitHub</a>
-          <a class="ghost" href="https://himusharier.site" target="_blank" rel="noreferrer">Visit Website</a>
+          <a href="/B_M_Sharier_Kabir_Resume.pdf" download target="_blank">Download CV</a>
+          <a class="ghost" href="https://github.com/himusharier" target="_blank">View GitHub</a>
+          <a class="ghost" href="mailto:himusharier@gmail.com">Email Me</a>
         </div>
       </div>
 
@@ -203,22 +205,36 @@ import { Component } from '@angular/core';
 })
 export class DashboardPageComponent {
   readonly highlights = [
-    { label: 'Public Repositories', value: '25', detail: 'Active open-source and learning projects' },
-    { label: 'GitHub Followers', value: '7', detail: 'Growing developer network' },
-    { label: 'Company', value: 'Nirupon Ltd', detail: 'Professional engineering experience' },
-    { label: 'Location', value: 'Dhaka', detail: 'Bangladesh (GMT+6)' }
+    { label: 'Experience', value: '08/2025 - Present', detail: 'Nirupon Limited, Mirpur-15, Dhaka' },
+    { label: 'Training', value: 'IsDB-BISEW', detail: 'IT Scholarship Programme (09/2024 - 07/2025)' },
+    { label: 'Education', value: 'B.Sc (Botany)', detail: 'University of Barishal (2019 - 2023)' },
+    { label: 'Location', value: 'Merul Badda', detail: 'Dhaka, Bangladesh' }
   ];
 
   readonly skills = [
     'Java',
-    'Spring Boot',
-    'Microservices',
-    'REST APIs',
-    'JWT Auth',
-    'PostgreSQL',
-    'Docker',
-    'Angular',
+    'JavaScript',
     'TypeScript',
-    'SCSS'
+    'Dart',
+    'Spring Boot',
+    'Spring',
+    'JPA',
+    'Hibernate',
+    'Servlet',
+    'JSP',
+    'JSF',
+    'REST APIs',
+    'PHP',
+    'WordPress Plugin',
+    'Flutter',
+    'Bootstrap',
+    'jQuery',
+    'MySQL',
+    'PostgreSQL',
+    'Oracle',
+    'Angular',
+    'JasperReports',
+    'GitHub',
+    'GitLab'
   ];
 }

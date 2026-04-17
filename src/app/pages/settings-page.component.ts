@@ -14,21 +14,14 @@ import { Component } from '@angular/core';
             <h4>Preferred Channels</h4>
             <ul>
               <li>
-                <span class="material-symbols-outlined" aria-hidden="true">code</span>
+                <span class="material-symbols-outlined" aria-hidden="true">mail</span>
                 <div>
-                  <p>GitHub</p>
-                  <a href="https://github.com/himusharier" target="_blank" rel="noreferrer">
-                    github.com/himusharier
+                  <p>Email</p>
+                  <a href="mailto:himusharier&#64;gmail.com">
+                    himusharier&#64;gmail.com
                   </a>
                 </div>
               </li>
-              <!-- <li>
-                <span class="material-symbols-outlined" aria-hidden="true">language</span>
-                <div>
-                  <p>Website</p>
-                  <a href="https://himusharier.site" target="_blank" rel="noreferrer">himusharier.site</a>
-                </div>
-              </li> -->
               <li>
                 <span class="material-symbols-outlined" aria-hidden="true">phone</span>
                 <div>
@@ -57,10 +50,19 @@ import { Component } from '@angular/core';
                 </div>
               </li>
               <li>
+                <span class="material-symbols-outlined" aria-hidden="true">code</span>
+                <div>
+                  <p>GitHub</p>
+                  <a href="https://github.com/himusharier" target="_blank" rel="noreferrer">
+                    github.com/himusharier
+                  </a>
+                </div>
+              </li>
+              <li>
                 <span class="material-symbols-outlined" aria-hidden="true">location_on</span>
                 <div>
                   <p>Location</p>
-                  <span>Dhaka, Bangladesh</span>
+                  <span>Merul Badda, Dhaka, Bangladesh</span>
                 </div>
               </li>
             </ul>
@@ -118,9 +120,8 @@ import { Component } from '@angular/core';
       margin: 0;
       padding: 0;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1rem;
-      // max-width: 40ch;
     }
 
     .channels-block li {
@@ -131,6 +132,7 @@ import { Component } from '@angular/core';
       border-radius: 18px;
       background: linear-gradient(145deg, rgb(255 255 255 / 92%), rgb(255 248 242 / 96%));
       border: 1px solid var(--color-border);
+      min-width: 0;
     }
 
     .channels-block .material-symbols-outlined {
@@ -158,6 +160,7 @@ import { Component } from '@angular/core';
       text-decoration: none;
       font-size: 0.9rem;
       line-height: 1.45;
+      overflow-wrap: anywhere;
     }
 
     .channels-block a:hover {
@@ -167,6 +170,16 @@ import { Component } from '@angular/core';
     @media (max-width: 920px) {
       .channels-block {
         margin-top: 1.6rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .channels-block ul {
+        grid-template-columns: 1fr;
+      }
+
+      .channels-block li {
+        align-items: flex-start;
       }
     }
   `

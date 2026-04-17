@@ -2,8 +2,6 @@ import { Routes } from '@angular/router';
 import { DashboardShellComponent } from './layout/dashboard-shell.component';
 import { DashboardPageComponent } from './pages/dashboard-page.component';
 import { ReportsPageComponent } from './pages/reports-page.component';
-import { SettingsPageComponent } from './pages/settings-page.component';
-import { UsersPageComponent } from './pages/users-page.component';
 
 export const routes: Routes = [
 	{
@@ -12,9 +10,15 @@ export const routes: Routes = [
 		children: [
 			{ path: '', pathMatch: 'full', redirectTo: 'home' },
 			{ path: 'home', component: DashboardPageComponent },
-			{ path: 'projects', component: UsersPageComponent },
+			{
+				path: 'projects',
+				loadComponent: () => import('./pages/users-page.component').then((m) => m.UsersPageComponent)
+			},
 			{ path: 'about', component: ReportsPageComponent },
-			{ path: 'contact', component: SettingsPageComponent }
+			{
+				path: 'contact',
+				loadComponent: () => import('./pages/settings-page.component').then((m) => m.SettingsPageComponent)
+			}
 		]
 	},
 	{ path: '**', redirectTo: '' }

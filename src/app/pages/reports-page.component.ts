@@ -5,50 +5,60 @@ import { Component } from '@angular/core';
   standalone: true,
   template: `
     <div class="container">
-      <h2 class="main-heading">Java and microservices engineer with full-stack execution</h2>
+      <h2 class="main-heading">Professional background, training, and delivery strengths</h2>
       <p class="description">
-        I build scalable, maintainable systems using Spring Boot and Angular with a strong focus on clean architecture and practical delivery.
+        Associate Software Engineer with practical delivery experience across Java/Spring Boot, Angular, PHP,
+        Flutter, and SQL platforms, backed by structured enterprise training from IsDB-BISEW.
       </p>
 
       <div class="content-grid">
-        <!-- My Journey Section -->
         <div class="section">
-          <h3 class="section-title">My Journey</h3>
+          <h3 class="section-title">Timeline</h3>
           <div class="timeline">
             <div class="timeline-item">
-              <div class="year">2026</div>
-              <p>25 public repositories with active contributions in Java and Angular</p>
+              <div class="year">2025 - Now</div>
+              <p>Associate Software Engineer at Nirupon Limited, building scalable backend microservices and Angular integrations.</p>
             </div>
             <div class="timeline-item">
-              <div class="year">2025</div>
-              <p>Delivered end-to-end systems using Spring Boot, Angular, PostgreSQL & Docker</p>
+              <div class="year">2024 - 2025</div>
+              <p>
+                Completed IsDB-BISEW IT Scholarship Programme with coursework in Java OOP, Oracle 19c,
+                Servlet, JSP, JSF, Hibernate, Angular, Spring Boot, UML, Android, and Flutter.
+              </p>
             </div>
             <div class="timeline-item">
-              <div class="year">2021</div>
-              <p>Began GitHub journey building production-style projects</p>
+              <div class="year">2019 - 2023</div>
+              <p>Completed B.Sc (Botany) from the University of Barishal.</p>
             </div>
           </div>
         </div>
 
-        <!-- What Clients Value Section -->
         <div class="section">
-          <h3 class="section-title">What Clients Value</h3>
+          <h3 class="section-title">What I Deliver</h3>
           <ul class="values-list">
             <li>
               <span class="checkmark">✓</span>
-              <span>Domain-driven microservices architecture for scalable backends</span>
+              <span>Scalable backend services using Java, Spring Boot, and REST APIs</span>
             </li>
             <li>
               <span class="checkmark">✓</span>
-              <span>Secure REST APIs with JWT authentication best practices</span>
+              <span>Optimized and reliable SQL workflows in PostgreSQL, Oracle, and MySQL</span>
             </li>
             <li>
               <span class="checkmark">✓</span>
-              <span>Clean, well-documented code and smooth team handover</span>
+              <span>API-connected Angular frontends with role-based dashboard experiences</span>
             </li>
             <li>
               <span class="checkmark">✓</span>
-              <span>Balanced focus on robust backend and intuitive frontend UX</span>
+              <span>PHP and WordPress plugin development for practical business and content use cases</span>
+            </li>
+            <li>
+              <span class="checkmark">✓</span>
+              <span>Mobile client implementation with Flutter and persistent local data workflows</span>
+            </li>
+            <li>
+              <span class="checkmark">✓</span>
+              <span>Team collaboration through Agile process, Git workflow, code reviews, and continuous debugging</span>
             </li>
           </ul>
         </div>
@@ -108,9 +118,9 @@ import { Component } from '@angular/core';
 
     .year {
       font-weight: 700;
-      font-size: 1.125rem;
+      font-size: 0.96rem;
       color: var(--color-accent);
-      min-width: 3.5rem;
+      min-width: 7rem;
       flex-shrink: 0;
       font-family: 'Courier New', monospace;
     }
