@@ -26,10 +26,10 @@ interface RepoProject {
   template: `
     <section class="head">
       <div>
-        <p class="kicker">Repository-driven portfolio</p>
-        <h2>Projects and Repositories</h2>
+        <p class="kicker">Repository-driven projects</p>
+        <h2>GitHub Repositories</h2>
         <p class="intro">
-          Curated from your listed repositories with direct focus on real work, training modules, and client systems.
+          A curated view of my public GitHub work, showing the tools, topics, and repository paths behind the projects I have built and shared.
         </p>
       </div>
     </section>
