@@ -7,11 +7,11 @@ import { Component } from '@angular/core';
     <section class="hero">
       <div>
         <p class="kicker">Software Engineer</p>
-        <h2>Building production-focused systems across Java, Angular, PHP, and Flutter.</h2>
+        <h2>Building production-focused systems across Java, Angular, PHP, and Spring Boot.</h2>
         <p class="copy">
-          I work across backend APIs, full-stack web apps, database systems, and mobile clients.
+          I work across backend APIs, full-stack web apps, database systems, and service-first architectures.
           My portfolio spans Spring Boot microservices, Angular dashboards, Oracle/PostgreSQL SQL projects,
-          PHP platforms, and Flutter user clients.
+          and PHP platforms.
         </p>
         <div class="cta-row">
           <a href="/B_M_Sharier_Kabir_Resume.pdf" download target="_blank">Download CV</a>
@@ -215,9 +215,9 @@ export class DashboardPageComponent {
     'Java',
     'JavaScript',
     'TypeScript',
-    'Dart',
     'Spring Boot',
     'Spring',
+    'Microservices',
     'JPA',
     'Hibernate',
     'Servlet',
@@ -226,7 +226,7 @@ export class DashboardPageComponent {
     'REST APIs',
     'PHP',
     'WordPress Plugin',
-    'Flutter',
+    
     'Bootstrap',
     'jQuery',
     'MySQL',

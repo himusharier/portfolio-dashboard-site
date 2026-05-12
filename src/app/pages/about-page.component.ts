@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
       <h2 class="main-heading">Professional background, training, and delivery strengths</h2>
       <p class="description">
         Associate Software Engineer with practical delivery experience across Java/Spring Boot, Angular, PHP,
-        Flutter, and SQL platforms, backed by structured enterprise training from IsDB-BISEW.
+        and SQL platforms, backed by structured enterprise training from IsDB-BISEW.
       </p>
 
       <div class="content-grid">
@@ -23,7 +23,7 @@ import { Component } from '@angular/core';
               <div class="year">2024 - 2025</div>
               <p>
                 Completed IsDB-BISEW IT Scholarship Programme with coursework in Java OOP, Oracle 19c,
-                Servlet, JSP, JSF, Hibernate, Angular, Spring Boot, UML, Android, and Flutter.
+                Servlet, JSP, JSF, Hibernate, Angular, Spring Boot, UML, and Android.
               </p>
             </div>
             <div class="timeline-item">
@@ -54,7 +54,7 @@ import { Component } from '@angular/core';
             </li>
             <li>
               <span class="checkmark">✓</span>
-              <span>Mobile client implementation with Flutter and persistent local data workflows</span>
+              <span>Mobile client implementation with Android and API-driven local data workflows</span>
             </li>
             <li>
               <span class="checkmark">✓</span>
